@@ -1,0 +1,506 @@
+/******************************************************************
+
+.keyframes アニメーションで使用するkeyframes
+
+******************************************************************/
+@use './functions' as *;
+
+
+/**************************************************************
+ローダー
+***************************************************************/
+@keyframes sk-rotateplane {
+  0% {
+    transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+  }
+  50% {
+    transform: perspective(120px) rotateX(-180deg) rotateY(0deg);
+  }
+  100% {
+    transform: perspective(120px) rotateX(-180deg) rotateY(-180deg);
+  }
+}
+
+
+
+
+/******************************************************************
+フェイドイン
+******************************************************************/
+@keyframes fadeIn {
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}
+
+/******************************************************************
+上にフェイドイン
+******************************************************************/
+@keyframes fadeUp {
+  0%{
+    opacity: 0;
+    transform: translateY(20%);
+  }
+  100%{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/******************************************************************
+// 消えた状態　→　上　トップのメインビジュアル部分にのみ仕様。
+******************************************************************/
+@keyframes fadeUpMv {
+  0%{
+    opacity: 0;
+    transform: translate(-50%, 5%);
+  }
+  100%{
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/******************************************************************
+// 上に消える openingで仕様。
+******************************************************************/
+@keyframes upFade {
+  0%{
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100%{
+    opacity: 0;
+    transform: translateY(-20%);
+  }
+}
+
+/******************************************************************
+フェイドアウト openingで仕様。
+******************************************************************/
+@keyframes fade {
+  0%{
+    opacity: 1;
+    visibility: visible;
+  }
+  100%{
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/******************************************************************
+右から左へ出現
+******************************************************************/
+@keyframes fadeRight {
+  0%{
+    opacity: 0;
+    transform: translateX(rem(20));
+  }
+  100%{
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/******************************************************************
+// 下 → 上
+******************************************************************/
+@keyframes emergeUp {
+  0%{
+    // opacity: 0;
+    transform: translateY(1em);
+  }
+  100%{
+    // opacity: 1;
+    transform: none;
+  }
+}
+
+/******************************************************************
+画像を上に上げる ドロワーのSNSアイコンに使用
+******************************************************************/
+@keyframes emergeUpSns {
+  0%{
+    transform: translateY(rem(40));
+  }
+  100%{
+    transform: translateY(0);
+  }
+}
+
+/******************************************************************
+ズームアップ
+******************************************************************/
+@keyframes zoomUp {
+  0%{
+    transform: scale(1);
+  }
+  100%{
+    transform: scale(1.1);
+  }
+}
+
+/******************************************************************
+下に線が動く
+******************************************************************/
+@keyframes downLine {
+  0%{
+    transform-origin: top;
+    transform: scale(1, 0) translateX(-50%);
+  }
+  50%{
+    transform-origin: top;
+    transform: scale(1, 1) translateX(-50%);
+  }
+  50.1%{
+    transform-origin: bottom;
+    transform: scale(1, 1) translateX(-50%);
+  }
+  100%{
+    transform-origin: bottom;
+    transform: scale(1, 0) translateX(-50%);
+  }
+}
+
+/******************************************************************
+文字アニメーション　アコーディオン
+******************************************************************/
+// 下から上に
+@keyframes accordion {
+  0%{
+    opacity: 0;
+    transform: translateY(50%);
+  }
+  100%{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// 上から下に
+@keyframes downAccordion {
+  0%{
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100%{
+    transform: translateY(50%);
+    opacity: 0;
+  }
+}
+
+/******************************************************************
+オープニングのライン
+******************************************************************/
+@keyframes stretchLine {
+  0%{
+    transform-origin: left;
+    transform: scale(0, 1);
+  }
+  30%{
+    transform-origin: left;
+    transform: scale(1, 1);
+  }
+  70%{
+    transform-origin: right;
+    transform: scale(1, 1);
+  }
+  100%{
+    transform-origin: right;
+    transform: scale(0, 1);
+  }
+}
+
+// @keyframes stretchLine {
+//   0%{
+//     transform-origin: left;
+//     transform: translate(-50%, -50%) scale(0, 1);
+//   }
+//   30%{
+//     transform-origin: left;
+//     transform: translate(-50%, -50%) scale(1, 1);
+//   }
+//   70%{
+//     transform-origin: right;
+//     transform: translate(-50%, -50%) scale(1, 1);
+//   }
+//   100%{
+//     transform-origin: right;
+//     transform: translate(-50%, -50%) scale(0, 1);
+//   }
+// }
+
+/******************************************************************
+メインビジュアル　ライン
+******************************************************************/
+@keyframes scrollDownLine {
+  0%{
+    opacity: 1;
+    transform-origin: top;
+    transform: scale(1, 0);
+  }
+  10%{
+    opacity: 1;
+    transform-origin: top;
+    transform: scale(1, 1);
+  }
+  90%{
+    opacity: 1;
+    transform-origin: top;
+    transform: scale(1, 1);
+  }
+  100%{
+    opacity: 0;
+    transform-origin: top;
+    transform: scale(1, 1);
+  }
+}
+
+/******************************************************************
+メインビジュアル　球
+******************************************************************/
+@keyframes circleDown {
+  0%{
+    transform: translate(-44%, 0) scale(0);
+  }
+  15%{
+    transform: translate(-44%, 0) scale(1);
+  }
+  85%{
+    transform: translate(-44%, rem(96)) scale(1);
+  }
+  100%{
+    transform: translate(-44%, rem(96)) scale(0);
+  }
+}
+
+/******************************************************************
+
+******************************************************************/
+@keyframes downLine {
+  0%{
+    transform-origin: top;
+    transform: scale(1, 0) translateX(-50%);
+  }
+  50%{
+    transform-origin: top;
+    transform: scale(1, 1) translateX(-50%);
+  }
+  50.1%{
+    transform-origin: bottom;
+    transform: scale(1, 1) translateX(-50%);
+  }
+  100%{
+    transform-origin: bottom;
+    transform: scale(1, 0) translateX(-50%);
+  }
+}
+
+
+/******************************************************************
+ヘッダーで使用
+******************************************************************/
+@keyframes accordionText {
+  0%{
+    transform: translateY(0);
+    // opacity: 1;
+  }
+  25%{
+    transform: translateY(-100%);
+    // opacity: 0;
+  }
+  26%{
+    transform: translateY(100%);
+    // opacity: 0;
+  }
+  27%{
+    transform: translateY(100%);
+    // opacity: 1;
+  }
+  75%{
+    transform: translateY(0);
+    // opacity: 1;
+  }
+  100%{
+    transform: translateY(0);
+    // opacity: 1;
+  }
+}
+
+/******************************************************************
+ハンバーガーメニュー
+******************************************************************/
+// @mixin animation(
+// 	$name,
+// 	$duration: 1s,
+// 	$timing-function: ease,
+// 	$delay: 0s,
+// 	$iteration-count: 1,
+// 	$direction: normal,
+// 	$fill-mode: forwards
+// ){
+// 	animation: {
+// 		name: $name;
+// 		duration: $duration;
+// 		timing-function: $timing-function;
+// 		delay: $delay;
+// 		iteration-count: $iteration-count;
+// 		direction: $direction;
+// 		fill-mode: $fill-mode;
+// 	}
+// }
+
+// 上のライン 
+// 初期状態
+@keyframes closeTop {
+  0%{
+    transform: translateY(rem(9)) rotate(43deg);
+  }
+  50%{
+    transform: translateY(rem(9));
+  }
+  100%{
+    transform: translateY(0);
+  }
+}
+
+// クラス付与後の動き
+@keyframes openTop {
+  0%{
+    transform: translateY(0);
+  }
+  50%{
+    transform: translateY(rem(9));
+  }
+  100%{
+    transform: translateY(rem(9)) rotate(43deg);
+  }
+}
+
+// 下のライン
+// 初期状態
+@keyframes closeBottom {
+  0%{
+    transform: translateY(rem(-9)) rotateZ(-43deg);
+  }
+  50%{
+    transform: translateY(rem(-9));
+  }
+  100%{
+    transform: translateY(0);
+  }
+}
+
+// クラス付与後の動き
+@keyframes openBottom {
+  0%{
+    transform: translateY(0);
+  }
+  50%{
+    transform: translateY(rem(-9));
+  }
+  100%{
+    transform: translateY(rem(-9)) rotateZ(-43deg);
+  }
+}
+
+/******************************************************************
+ボタン円 ホバーアニメーション
+******************************************************************/
+// 最初の状態
+@keyframes circleToSmall {
+  0%{
+    transform: scale(1.1);
+  }
+  100%{
+    transform: scale(1);
+  }
+}
+// ホバー時
+@keyframes circleToLarge {
+  0%{
+    transform: scale(1);
+  }
+  100%{
+    transform: scale(1.1);
+  }
+}
+
+/******************************************************************
+ボタン 矢印 ホバーアニメーション 右へ消える
+******************************************************************/
+@keyframes allowFadeRight {
+  0%{
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+  40%{
+    opacity: 0;
+  }
+  49.9%{
+    transform: translate(1em, 0);
+    opacity: 0;
+  }
+  50%{
+    transform: translate(-1em, 0);
+    opacity: 0;
+  }
+  100%{
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}
+
+/******************************************************************
+ボタン 矢印 ホバーアニメーション 左へ消える
+******************************************************************/
+@keyframes allowFadeLeft {
+  0%{
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+  40%{
+    opacity: 0;
+  }
+  49.9%{
+    transform: translate(-1em, 0);
+    opacity: 0;
+  }
+  50%{
+    transform: translate(1em, 0);
+    opacity: 0;
+  }
+  100%{
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}
+
+/******************************************************************
+トップに戻るボタン　アニメーション 　上に消える
+******************************************************************/
+@keyframes allowFadeUp {
+  0%{
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+  40%{
+    opacity: 0;
+  }
+  49.9%{
+    transform: translate(0, -1em);
+    opacity: 0;
+  }
+  50%{
+    transform: translate(0, 1em);
+    opacity: 0;
+  }
+  100%{
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}

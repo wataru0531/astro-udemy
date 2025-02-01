@@ -1,0 +1,64 @@
+/**************************************************************
+c-btn-hamburger
+***************************************************************/
+@use '../global/' as *;
+
+.c-btn-hamburger{
+  width: rem(30);
+  height: rem(20);
+  position: relative;
+}
+
+.c-btn-hamburger span{
+  display: inline-block;
+  width: 100%;
+  height: rem(2);
+  background: $black;
+  border-radius: rem(1);
+  position: absolute;
+  // animation-play-state: paused;
+}
+
+// 1本目
+.c-btn-hamburger span:nth-child(1){
+  top: 0;
+  left: 0;
+
+  transition: top .2s .2s, transform .2s; // 逆再生時
+}
+
+// ２本目
+.c-btn-hamburger span:nth-child(2){
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  transition: opacity .2s;
+}
+
+// 3本目
+.c-btn-hamburger span:nth-child(3){
+  bottom: 0;
+  left: 0;
+  // 指定プロパティ duration delay
+  transition: bottom .2s .2s, transform .2s;
+}
+
+// is-transform付与
+.c-btn-hamburger.is-transform span:nth-child(1){
+  top: calc(50% - rem(1));
+  transform: rotateZ(44deg);
+  // 指定プロパティ duration delay
+  transition: top .2s, transform .2s .2s;
+}
+
+.c-btn-hamburger.is-transform span:nth-child(2){
+  opacity: 0;
+}
+
+.c-btn-hamburger.is-transform span:nth-child(3){
+
+  bottom: calc(50% - rem(1));
+  transform: rotateZ(-44deg);
+  // 指定プロパティ duration delay
+  transition: bottom .2s, transform .2s .2s;
+}

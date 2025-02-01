@@ -1,0 +1,74 @@
+/**************************************************************
+アコーディオン
+***************************************************************/
+@use "../global/" as *;
+
+.c-accordion__item{
+  border: rem(1) solid $line;
+}
+
+.c-accordion__item:not(:first-child){
+  margin-top: rem(10);
+}
+
+// タイトル
+.c-accordion__title{
+  padding-top: rem(10);
+  padding-bottom: rem(10);
+  padding-right: rem(10);
+  padding-left: rem(10);
+  font-weight: bold;
+  font-size: rem(20);
+  line-height: 1.6;
+  letter-spacing: .05em;
+  position: relative;
+}
+
+// プラスアイコン
+.c-accordion__title::before,
+.c-accordion__title::after{
+  content: "";
+  display: block;
+  width: rem(20);
+  height: rem(3);
+  background: #3ABEC1;
+  position: absolute;
+  top: 50%;
+  right: rem(20);
+
+  transform: translateY(-50%);
+  transition: all .3s;
+}
+
+.c-accordion__title::after{
+  transform: translateY(-50%) rotate(90deg);
+}
+
+// 各アイテムにis-active ... プラスボタンが回転
+.c-accordion__item.is-active .c-accordion__title::before{
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.c-accordion__item.is-active .c-accordion__title::after{
+  transform: translateY(-50%) rotate(180deg);
+  opacity: 0;
+}
+
+
+// コンテンツ
+.c-accordion__content{
+  padding-top: rem(10);
+  padding-bottom: rem(10);
+  padding-right: rem(10);
+  padding-left: rem(10);
+  font-weight: normal;
+  font-size: rem(16);
+  line-height: 1.6;
+  letter-spacing: .05em;
+
+  display: none;
+}
+
+// .c-accordion__content.is-open{
+//   display: block;
+// }

@@ -1,0 +1,85 @@
+/*******************************************************
+
+.p-card
+
+********************************************************/
+@use '../global/' as *;
+
+.p-card{
+  display: flex;
+  flex-direction: column;
+}
+
+.p-card__img{
+  overflow: hidden;
+  position: relative;
+}
+
+.p-card__img::before{
+  content: '';
+  display: block;
+  padding-top: 66.567164179%;
+}
+
+// 画像
+.p-card__img img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.p-card__body{
+  flex: 1;
+  padding-top: rem(15);
+  padding-bottom: rem(15);
+  padding-right: rem(5);
+  padding-left: rem(5);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.p-card__title{
+  font-weight: 700;
+  font-size: rem(16);
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: $text;
+
+  @include mq('tab'){
+    font-size: rem(18);
+  }
+}
+
+.p-card__excerpt{
+  margin-top: rem(10);
+  font-weight: 500;
+  font-size: rem(14);
+  line-height: 2;
+  letter-spacing: normal;
+  color: $text;
+
+  @include mq('tab'){
+    font-size: rem(16);
+  }
+}
+
+.p-card__category-time{
+  margin-top: rem(10);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.p-cart__time{
+  font-weight: 500;
+  font-size: rem(14);
+  line-height: 1.2;
+  letter-spacing: normal;
+  color: $text;
+}
+

@@ -1,0 +1,36 @@
+/**************************************************************
+p-header
+***************************************************************/
+@use '../global/' as *;
+
+.p-header{
+  width: 100%;
+  height: rem(100);
+  
+  // background: rgb(0, 255, 51);
+}
+
+// ロゴ
+.p-header__logo{
+  height: inherit;
+  color: $black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.p-header__inner{
+  height: inherit;
+  padding-right: rem(20);
+  padding-left: rem(20);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// ハンバーガー
+.p-header__hamburger{
+  position: relative;
+  z-index: 500;
+}

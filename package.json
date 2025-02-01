@@ -9,6 +9,10 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.1.10"
+    "astro": "^5.1.10",
+    "astro-google-fonts-optimizer": "^0.2.2",
+    "astro-seo": "^0.8.4",
+    "sass": "^1.83.4",
+    "sitemap": "^8.0.0"
   }
 }

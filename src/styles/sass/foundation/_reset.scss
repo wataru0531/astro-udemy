@@ -1,0 +1,137 @@
+/***************************************************************
+
+リセットCSS
+
+***************************************************************/
+@use '../global/' as *;
+
+/* リキッドレイアウト対応 */
+html {
+	// 375px~787px
+	font-size: vw(375, 16);
+
+	@include mq("sp") {
+		font-size: 16px;
+	}
+  
+	// 768px~inner
+	@include mq("tab") {
+		font-size: vw(strip-unit($l-inner), 16); // 16 / 1100 * 100vw
+		// font-size: max(#{vw(900, 16)}, 12px);
+    // font-size: 16px;
+	}
+  
+	//inner~max-screen
+	@media (min-width: $l-inner) {
+		font-size: 16px;
+	}
+}
+
+/* Set core body defaults */
+body {
+	font-family: $font-family-sub, $font-family-base;
+	font-size: $font-size-base;
+	font-weight: $font-weight-base;
+  line-height: $lh;
+	color: $text;
+  // background-color:;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	overflow-wrap: break-word;
+	min-height: 100vh;
+	min-height: -webkit-fill-available;
+	text-rendering: optimizeSpeed;
+	position: relative;
+	z-index: -9999;
+  -webkit-tap-highlight-color: transparent; //スマホでaタグやbuttonタグのクリック時に背景色が変わらないように指定。
+}
+
+
+// スムーススクロール
+html {
+  scroll-behavior: smooth;
+}
+
+/* pcの電話番号発信対応 */
+a[href^="tel:"] {
+  @include mq("tab") {
+    pointer-events: none;
+  }
+}
+
+/* ホバー */
+a {
+  text-decoration: none;
+  color: inherit;
+  // transition: all 0.3s;
+  // @include mq("tab") {
+  //   &:hover {
+  //     opacity: 0.7;
+  //   }
+  // }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default padding */
+ul,
+ol {
+  padding: 0;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+
+/* Remove list styles on ul, ol elements with a class attribute */
+ul,
+ol {
+  list-style: none;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img{
+	display: block;
+	width: 100%;
+  max-width: 100%;
+}
+
+/* Natural flow and rhythm in articles by default */
+article > * + * {
+  margin-top: 1em;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Blur images when they have no alt attribute */
+img:not([alt]) {
+  filter: blur(10px);
+}

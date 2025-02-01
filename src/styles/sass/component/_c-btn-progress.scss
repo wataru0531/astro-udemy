@@ -1,0 +1,53 @@
+/**************************************************************
+
+トップに戻るボタン　プログレス付き
+
+***************************************************************/
+@use "../global/" as *;
+
+.c-btn-progress{
+  width: rem(70);
+  height: rem(70);
+  // background: #333;
+  border-radius: rem(9999);
+  box-shadow: 0 0 rem(5) rgba(0, 0, 0, .3);
+  display: grid;
+  place-items: center;
+
+  opacity: 0;
+  visibility: hidden;
+  transition: .3s;
+}
+
+.c-btn-progress__inner{
+  width: calc(100% - rem(15));
+  height: calc(100% - rem(15));
+  border-radius: rem(9999);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background: #ffffff;
+}
+
+// 矢印の先
+.c-btn-progress__tips{
+  display: inline-block;
+  width: rem(10);
+  height: rem(10);
+  border-top: rem(3) solid #333;
+  border-left: rem(3) solid #333;
+
+  // 先にtranslateさせる
+  transform: translateY(rem(5)) rotate(45deg);
+}
+
+// 矢印のライン
+.c-btn-progress__line{
+  display: inline-block;
+  width: rem(3);
+  height: rem(30);
+  background: #333333;
+  transform: translateY(rem(-5));
+}

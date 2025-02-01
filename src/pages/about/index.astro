@@ -1,0 +1,28 @@
+---
+// フロントマター
+// →　ページごとのデータや変数を初期化するために使われる特別なセクション
+//    - 変数を定義 したり、コンポーネントや関数をインポート 
+//    - ⭐️サーバーサイドでの処理: 
+//        →フロントマター内で記述された JavaScriptはサーバーサイドで実行され、
+//         静的な HTML コンテンツとして変換される
+//         → 検証で確認可能
+
+import Layout from "../../layouts/Layout.astro";
+import Btn from "src/components/Btn.astro";
+
+const title = "会社情報"
+// console.log(title);
+const color = "red";
+
+const logo = "/assets/img/logo.png";
+
+---
+
+<Layout 
+  title={ title } 
+  color={ color }
+>
+  <h1 style=`color: ${ color }`>会社概要</h1>
+  <Btn btnTitle="aboutのbtn" />
+</Layout>
+

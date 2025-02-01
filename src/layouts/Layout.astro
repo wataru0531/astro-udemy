@@ -1,22 +1,76 @@
+---
+// 基本的なレイアウト
+
+// Google Fontsの読み込みを最適化
+// → レンダリングの最適化、不要なフォントを省く、キャッシュ最適化、Google Fontsのリクエストを減らす
+import { GoogleFontsOptimizer } from "astro-google-fonts-optimizer";
+
+// sass読み込み 
+// ⭐️TODO グローバル読み込みと各コンポーネントで読み込むものをわける
+// import "../styles/sass/style.scss";
+
+import Navigation from "../components/Navigation.astro";
+
+const { title, color } = Astro.props;
+// console.log(title);
+
+---
+
+<!-- 
+⭐️TODO headもコンポーネント化して動的にする。astro-seoを使う
+				→ https://zenn.dev/h_ymt/scraps/104995ef750f48
+-->
 <!doctype html>
-<html lang="en">
+<html lang="ja">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+
+		<!-- 
+			ここで書いたCSSはサーバーでレンダリング
+		-->
+		<style>
+			body{
+				font-weight: 400;
+				font-size: 16px;
+				left: 1.6;
+				letter-spacing: .05em;
+				color: #181818;
+				background-color: rgb(182, 199, 211);
+
+			}
+			
+		</style>
+
+		<!-- 
+			Google Fonts  
+			・preconnect
+			→ 通常、ブラウザが外部のフォント(Google Fonts)を取得する際、DNS解決、TLSハンドシェイク、HTTPリクエスト、という処理が発生するが、
+				ページがレンダリングされる前にこれらの準備を行い、遅延を減らせる というメリットがある
+				⭐️GoogleFontsOptimizerでこれらの処理を行っているかどうか不明なためpreconnectは記述しておいた方がいい
+		-->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<!-- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"> -->
+		<GoogleFontsOptimizer url="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" />
+		
+		<title>{ title }</title>
 	</head>
 	<body>
-		<slot />
+
+		<Navigation />
+
+		<!-- 
+			<slot />
+			→ Web Components や Astro コンポーネント 内で、
+				親コンポーネントから子コンポーネントにコンテンツを渡すために使う。
+				例えば、親コンポーネントが子コンポーネントに対して、差し込みたいコンテンツを slot に渡すことができる
+				Layoutが子コンポーネントとなる
+		-->
+		<slot/>
+
+
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>

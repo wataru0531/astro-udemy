@@ -1,0 +1,353 @@
+/***************************************************************
+
+フォームリセット
+※ input[type="text"]などと指定した場合、、クラス指定よりも優先される。
+
+***************************************************************/
+@use '../global/' as *;
+
+label{
+  display: block;
+}
+
+input,
+button,
+select,
+textarea {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: transparent;
+  background-image: none;
+  border: none;
+  // border: 1px solid #333;
+  border-radius: 0;
+  font-family: inherit;
+  outline: none;
+  margin: 0;
+  padding: 0;
+}
+
+textarea {
+  resize: vertical;
+}
+
+input[type="submit"],
+input[type="button"],
+label,
+button,
+select {
+  cursor: pointer;
+}
+
+// input[]とした場合には詳細度が高まってしまい、ここのreset.cssを上書きできなくなる。
+/************************************************************************
+  テキスト
+************************************************************************/
+input[type="text"]{
+  padding-top: rem(6);
+  padding-bottom: rem(6);
+  padding-right: rem(6);
+  padding-left: rem(6);
+  width: 100%;
+  font-family: inherit;
+  font-size: rem(16);
+  font-weight: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  color: inherit;
+	background-color: transparent;
+	background-image: none;
+	border: rem(1) solid rgba(0, 0, 0, 0.16);
+	border-radius: 0;
+  appearance: none;
+}
+
+/************************************************************************
+  メールアドレス
+************************************************************************/
+input[type="email"]{
+  padding-top: rem(6);
+  padding-bottom: rem(6);
+  padding-right: rem(6);
+  padding-left: rem(6);
+  width: 100%;
+  font-family: inherit;
+  font-size: rem(16);
+  font-weight: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  color: inherit;
+	background-color: transparent;
+	background-image: none;
+	border: rem(1) solid rgba(0, 0, 0, 0.16);
+	border-radius: 0;
+  appearance: none;
+}
+
+/************************************************************************
+  電話番号
+************************************************************************/
+input[type="tel"]{
+  padding-top: rem(6);
+  padding-bottom: rem(6);
+  padding-right: rem(6);
+  padding-left: rem(6);
+  width: 100%;
+  font-family: inherit;
+  font-size: rem(16);
+  font-weight: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  color: inherit;
+	background-color: transparent;
+	background-image: none;
+	border: rem(1) solid rgba(0, 0, 0, 0.16);
+	border-radius: 0;
+  appearance: none;
+}
+
+/************************************************************************
+  パスワード
+************************************************************************/
+input[type="password"]{
+  padding-top: rem(6);
+  padding-bottom: rem(6);
+  padding-right: rem(6);
+  padding-left: rem(6);
+  width: 100%;
+  font-family: inherit;
+  font-size: rem(16);
+  font-weight: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  color: inherit;
+	background-color: transparent;
+	background-image: none;
+	border: rem(1) solid rgba(0, 0, 0, 0.16);
+	border-radius: 0;
+  appearance: none;
+}
+
+/************************************************************************
+  テキストエリア
+************************************************************************/
+textarea{
+  padding-top: rem(6);
+  padding-bottom: rem(6);
+  padding-right: rem(6);
+  padding-left: rem(6);
+  width: 100%;
+  font-family: inherit;
+  font-size: rem(16);
+  font-weight: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  color: inherit;
+	background-color: transparent;
+	background-image: none;
+	border: rem(1) solid rgba(0, 0, 0, 0.16);
+	border-radius: 0;
+  appearance: none;
+}
+
+/************************************************************************
+  チェックボックス
+************************************************************************/
+input[type="checkbox"]{
+  position: absolute;
+  white-space: nowrap;
+  width: rem(20);
+  height: rem(20);
+  border: 0;
+  margin: rem(-1);
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+}
+
+input[type="checkbox"] + span{
+  padding-left: rem(25);
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+}
+
+// 箱
+input[type="checkbox"] + span::before{ 
+  content: '';
+  display: block;
+  width: rem(18);
+  height: rem(18);
+  background-color: #fff;
+  border: rem(1) solid rgba(0, 0, 0, 0.16);
+  border-radius: rem(2);
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+// チェック
+input[type="checkbox"] + span::after{
+  margin-top: rem(-2);
+  content: '';
+  display: block;
+  width: rem(12);
+  height: rem(8);
+  border-bottom: rem(2) solid rgba(0, 0, 0, 0.32);
+  border-left: rem(2) solid rgba(0, 0, 0, 0.32);
+  position: absolute;
+  top: 50%;
+  left: rem(3);
+  transform: translateY(-50%) rotate(-45deg);
+
+  opacity: 0;
+  transition: opacity .3s;
+}
+
+input[type="checkbox"]:checked + span::after{
+  opacity: 1;
+}
+
+/************************************************************************
+  ラジオボタン
+************************************************************************/
+input[type="radio"] {
+  position: absolute;
+  white-space: nowrap;
+  width: rem(20);
+  height: rem(20);
+  border: 0;
+  margin: rem(-1);
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+}
+
+input[type="radio"] + span{
+  padding-left: rem(25);
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+}
+
+// 外丸
+input[type="radio"] + span::before{
+  content: '';
+  display: block;
+  width: rem(18);
+  height: rem(18);
+  background-color: #fff;
+  border: rem(1) solid rgba(0, 0, 0, 0.16);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+// 中丸
+input[type="radio"] + span::after{
+  content: '';
+  display: block;
+  padding-top: rem(4);
+  padding-bottom: rem(4);
+  padding-right: rem(4);
+  padding-left: rem(4);
+  width: rem(12);
+  height: rem(12);
+  background-color: rgba(0, 0, 0, 0.32);
+  border: rem(1) solid transparent;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: rem(3);
+  transform: translateY(-50%);
+
+  opacity: 0;
+  transition: opacity .3s;
+}
+
+input[type="radio"]:checked + span::after{
+	opacity: 1;
+}
+
+/************************************************************************
+  セレクトボックス(ドロップダウンメニュー)
+************************************************************************/
+select{
+  padding-top: rem(8);
+  padding-bottom: rem(8);
+  padding-right: rem(8);
+  padding-left: rem(8);
+  display: block;
+  width: 100%;
+  font-family: inherit;
+  font-size: rem(16);
+  font-weight: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  color: inherit;
+	background-color: transparent;
+	border: rem(1) solid rgba(0, 0, 0, 0.16);
+	border-radius: 0;
+  appearance: none;
+
+  background-image: url('../images/arrow-down.png');
+  background-repeat: no-repeat;
+  background-size: rem(15);
+  // background-position...(x y)
+  background-position: right rem(12) center;
+}
+
+/************************************************************************
+送信ボタン input CF7
+************************************************************************/
+input[type="submit"]{
+  display: inline;
+  padding-top: rem(10);
+  padding-bottom: rem(10);
+  padding-right: rem(40);
+  padding-left: rem(40);
+  font-weight: normal;
+  font-size: rem(16);
+  line-height: 1;
+  letter-spacing: normal;
+  color: $white;
+  background-color: $black;
+  border: rem(1) solid $text;
+  border-radius: rem(9999);
+  transition: all .3s;
+}
+input[type="submit"]:hover{
+  color: $black;
+  background-color: $white;
+}
+
+
+/************************************************************************
+送信ボタン button  MWWP
+************************************************************************/
+button[type="submit"]{
+  display: inline;
+  padding-top: rem(10);
+  padding-bottom: rem(10);
+  padding-right: rem(40);
+  padding-left: rem(40);
+  font-weight: normal;
+  font-size: rem(16);
+  line-height: 1;
+  letter-spacing: normal;
+  color: $white;
+  background-color: $black;
+  border: rem(1) solid $text;
+  border-radius: rem(9999);
+  transition: all .3s;
+}
+button[type="submit"]:hover{
+  color: $black;
+  background-color: $white;
+}

@@ -1,0 +1,31 @@
+---
+
+---
+
+
+<p class="alert">エラーです</p>
+
+<!-- 
+  is:global → 本来このコンポーネントに収めたいところをグローバルであてたい時に記述
+  → .alert[data-astro-cid-wpkbbupk]{padding:10px;}
+    ここから[]の属性がとれて、.alert{}としてheadタグに埋め込まれる
+-->
+<!-- <style is:global> -->
+<style>
+  /* 
+  .alert{
+    padding: 10px;
+    border: 1px solid #f33;
+    background-color: #fcc;
+  } 
+  */
+
+  /* セレクタごとにグローバルで当てる場合 */
+  :global(.alert){
+    padding: 10px;
+    border: 1px solid #f33;
+    background-color: #fcc;
+  }
+
+
+</style>

@@ -1,0 +1,58 @@
+/**************************************************************
+p-about
+***************************************************************/
+@use "../global" as *;
+
+.p-about{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.p-about__title{
+  line-height: 1;
+}
+
+
+.p-about__title .char{
+  display: inline-block;
+  opacity: 0;
+}
+
+
+.p-about__title.inview .char{
+  @include animation(
+    $name: accordion,
+    $duration: 0.5s,
+    $timing-function: cubic-bezier(0.39, 1.57, 0.58, 1),
+    $fill-mode: both,
+    // both ... アニメーション開始時はkeyframesの終了。終わりはforwards
+  );
+
+  // $iには1から30までの数値
+  @for $i from 1 through 30{
+    &:nth-child(#{$i}){
+      animation-delay: $i * 0.04s;
+    }
+  }
+
+}
+
+
+// GSAPによるアニメーション
+.tween-animate-title{
+  line-height: 1;
+  opacity: 0;
+}
+
+.tween-animate-title.inview{
+  opacity: 1;
+}
+
+// 初期段階はopacityを0に。GSAP側でopacityを1にする
+.tween-animate-title .char{
+  display: inline-block;
+  opacity: 0;
+}

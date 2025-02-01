@@ -1,0 +1,50 @@
+/*******************************************************
+
+.p-card-lists-12    1列 → 2列
+
+********************************************************/
+@use '../global/' as *;
+@use 'sass:math';
+
+.p-card-lists-12{
+  
+  @include mq('tab'){
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+// 横幅
+.p-card-lists-12__card{
+  
+  @include mq('tab'){
+    width: 100%;
+    // 横幅 - 余白1つをカードの枚数2枚で割った値
+    max-width: calc(math.div(100%, 2) - math.div(rem(20)*1, 2));
+  }
+  
+}
+
+// スマホ
+.p-card-lists-12__card:not(:first-child){
+  margin-top: rem(30);
+
+  @include mq('tab'){
+    margin-top: 0;
+  }
+}
+
+// タブレット
+.p-card-lists-12__card:nth-child(odd){
+
+  @include mq('tab'){
+    margin-right: rem(20);
+  }
+}
+
+.p-card-lists-12__card:nth-child(n+3){
+
+  @include mq('tab'){
+    margin-top: rem(30);
+  }
+}

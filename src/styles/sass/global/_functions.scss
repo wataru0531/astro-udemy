@@ -1,0 +1,49 @@
+@use "sass:math"; // ビルトインモジュール読み込み。
+@use "sass:meta";
+
+// これまで...padding: (60px / 3); → padding: 20px;となったが、
+// これからは...padding: math.div(60px, 3);　とする。
+
+/***************************************************************
+
+rem()関数
+
+***************************************************************/
+@function rem($pixels) {
+  @return math.div($pixels, 16) * 1rem;
+}
+
+/***************************************************************
+
+vwで返す関数
+reset.scssで使用。
+$window_widthにはinner幅が入る。
+仮に$window_widthに1000px、$sizeに16が入った場合、16vwが返る。
+
+***************************************************************/
+// @function vw($window_width, $size) {
+// 	@return $size / $window_width * 100vw;
+// }
+
+@function vw($window_width, $size) {
+	@return math.div($size, $window_width) * 100vw;
+}
+
+
+/***************************************************************
+
+単位を取り除いて数値だけを返す
+例えば、20px が入力されたら、20 という単位なしの数値を返す
+
+***************************************************************/
+
+@function strip-unit($number) {
+  // meta.type-of($number) == "number" → $number のデータ型が number（数値）であるかどうか 
+  // not math.is-unitless($number) → その数値に単位がないかどうかを判定
+  //                                  notなので単位がある場合に処理を動かす
+  @if meta.type-of($number) == "number" and not math.is-unitless($number) {
+    @return math.div($number, $number * 0 + 1);
+    // → $numberが20pxの場合、20px / 1px となり、pxがなくなり数値だけが取得できる
+  }
+  @return $number;
+}

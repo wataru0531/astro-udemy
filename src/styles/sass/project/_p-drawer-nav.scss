@@ -1,0 +1,14 @@
+/**************************************************************
+p-drawer-nav
+***************************************************************/
+@use "../global/" as *;
+
+
+.p-drawer-nav{
+  width: 100%;
+  height: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

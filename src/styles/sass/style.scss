@@ -1,0 +1,11 @@
+@use './global/' as *;
+@use "sass:math";
+
+// globalはその他のフォルダで読み込むだけなのでここで読み込む必要はない。
+@use './foundation'; // index.scssは省略できるので、fundationフォルダでuseしたものをここで使うことができる。
+@use './layout';
+@use './component';
+@use './project';
+@use './utility';
+@use './external';
+

@@ -1,11 +1,126 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Layout from '../layouts/Layout.astro';
+// import Alert from '../components/Alert.astro';
+import Btn from "../components/Btn.astro";
+
+// const navs = ["Home", "About", "Contact"]
+
+// オブジェクトの配列
+// const navs = [
+// 	{
+// 		href: "home",
+// 		label: "Home"
+// 	},
+// 	{
+// 		href: "about",
+// 		label: "About"
+// 	},
+// 	{
+// 		href: "contact",
+// 		label: "Contact"
+// 	}
+// ]
+
+const color =  "yellow";
+const btnTitle = "ボタン1";
 ---
 
+
 <Layout>
-	<Welcome />
+	<h1>Home</h1>
+
+	<!-- <ul>
+		{ 
+			navs.map((nav, idx) => {
+				return <li><a href={`./${nav.href}`}>{ nav.label }</a></li>
+			})
+		}
+	</ul> -->
+
+	<!-- <Alert /> -->
+
+	<p class="alert">トップページの警告です</p>
+
+	<p class="description">CSSに変数を使います</p>
+
+	<section class="container">
+		<div class="container__inner">
+			<h2 class="container__title">セクションタイトル</h2>
+			<div class="container__subtitle">サブタイトル</div>
+
+			<div class="container__btn">
+				<Btn btnTitle={ btnTitle }/>
+			</div>
+		</div>
+	</section>
 </Layout>
+
+
+<!-- 
+ここで書いたCSSはサーバー側でレンダリングされる
+⭐️importなどcssを読み込んだり、ブラウザの機能を使う場合はクライアントサイドでレンダリングされる
+コンポーネントごとにstyleをあてることができる。
+
+headタグ内に埋め込まれて個別のクラス名が割り当てられる
+→ .alert[data-astro-cid-wpkbbupk]{padding:10px;}
+
+グローバルにはreset.cssをあてて
+使い回すコンポーネントはコンポーネントに書いてサーバー側でレンダリングさせる
+-->
+
+<!-- 
+	⭐️css
+	・lang="scss" → scssを使う宣言
+		→ config.mjs、tsconfig.json を書き換える
+	・define:vars={{ color }}
+		→ styleタグ内でCSS変数を使う場合に宣言
+-->
+<style 
+	lang="scss" 
+	define:vars={{ color }}
+>
+	.description{
+		color: var(--color);
+	}
+
+	/* 別々のcssが使われる */
+	/* .alert{
+		padding: 10px;
+		border: 1px solid #green;
+		background-color: green;
+	} */
+
+.container{
+	margin-top: 10px;
+}
+
+.container__inner{
+	margin: 0 auto;
+	padding-left: 20px;
+	padding-right: 20px;
+	width: 100%;
+	max-width: 768px;
+}
+
+.container__subtitle{
+	/* color: $wineRed; */
+
+	/* @include mq("tab"){
+		color: $text;
+	} */
+}
+
+</style>
+
+
+<!-- ⭐️クライアントでJavaScriptを使う記述方法 -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const h1 = document.querySelector("h1");
+    // console.log(h1); // ✅ ここならエラーなし
+  });
+</script>
+
+<!-- ⭐️`client:load` で外部JSを読み込む -->
+<!-- <script client:load src="/scripts/index.js"></script> -->

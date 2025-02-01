@@ -1,0 +1,133 @@
+@use './variable' as *;
+@use './functions' as *;
+
+@use "sass:map"; // ビルトインモッジュール読み込み
+// 以前のmap-get()関数はmap.get(マップ名, キー)に変更。
+// DartSassではビルトインモジュールとなったため。
+@use "sass:math";
+
+/***************************************************************
+
+メディアクエリー
+
+***************************************************************/
+@mixin mq($breakpoint: tab) {
+	@media #{map.get($breakpoints, $breakpoint)} {
+		@content;
+	}
+}
+
+/**************************************************************
+
+疑似要素
+
+***************************************************************/
+@mixin p-base(
+  $which: before,
+  $top: 0,
+  $left: 0,
+  $content: "",
+  $position: absolute,
+  $width: 100%,
+  $height: 100%,
+  $display: block
+) {
+  &::#{$which} {
+    display: $display;
+    content: $content;
+    position: $position;
+    top: $top;
+    left: $left;
+    width: $width;
+    height: $height;
+    @content;
+  }
+}
+
+/***************************************************************
+
+アニメーション 
+animation...一括指定プロパティ
+animation: ①-name ②-duration ③-timing ④-delay ⑤-iteration ⑥-direction ⑦-fill ⑧-play;
+
+***************************************************************/
+@mixin animation(
+	// name以外はデフォルトを設定
+	$name,
+	$duration: 1s,
+	$timing-function: ease,
+	$delay: 0s,
+	$iteration-count: 1,
+	$direction: normal,
+	$fill-mode: forwards
+){
+	animation: {
+		name: $name;
+		duration: $duration;
+		timing-function: $timing-function;
+		delay: $delay;
+		iteration-count: $iteration-count;
+		direction: $direction;
+		fill-mode: $fill-mode;
+	}
+}
+
+// fill-mode 参考 https://shu-naka-blog.com/css/animation-fill-mode/
+// none(初期値) ... アニメーション実行の前後にスタイルを指定しません。元のスタイルが適用
+// forwards    ... アニメーション終了時に最後の@keyframesの「100%(to)」のスタイルが適用させれます。
+// backwards   ... アニメーション完了後、最初の@keyframes「0%(from)」のスタイルが適用させれます。元のスタイルが適用されます。
+// both        ... アニメーション開始時は「backwards」(0%時の元のスタイル)、終了時は「forwards」(100%時のスタイル)と同じスタイルが適用させれます。
+
+/***************************************************************
+
+フォントサイズ
+
+***************************************************************/
+@mixin font(
+	$size: rem(16),
+	$weight: normal,
+	$l_height: 1,
+	$l_spacing: normal,
+	$color: #333,
+){
+	font: {
+		size: $size;
+		weight: $weight;
+	}
+	line-height: $l_height;
+	letter-spacing: $l_spacing;
+	color: $color;
+}
+
+/***************************************************************
+
+画像の中央寄せ...カードで使用。
+
+***************************************************************/
+@mixin image_center{
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+/***************************************************************
+
+line-height  デザインカンプからの読み取り
+
+***************************************************************/
+@mixin l_height($pixels, $height){
+	line-height: math.div($height, $pixels);
+}
+
+/***************************************************************
+
+letter-spacing  デザイン還付からの読み取り
+
+***************************************************************/
+@mixin l-spacing($spacing){
+	letter-spacing: math.div($spacing, 1000) + em;
+}

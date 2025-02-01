@@ -1,0 +1,82 @@
+/**************************************************************
+c-tab-switch
+***************************************************************/
+@use "../global/" as *;
+
+.c-tab-switch{
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
+  max-width: rem(500);
+  box-shadow: 0 0 rem(10) rgba(0, 0, 0, .3);
+
+  @include mq('tab'){
+    max-width: rem(800);
+  }
+}
+
+// タブ部分
+.c-tab-switch__tabs{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.c-tab-switch__tabs > li{
+  width: 50%;
+
+  @include mq("tab"){
+    width: 25%;
+  }
+}
+
+.c-tab-switch__tabs > li > a{
+  display: block;
+  padding-top: rem(15);
+  padding-bottom: rem(15);
+  padding-right: rem(15);
+  padding-left: rem(15);
+  text-align: center;
+  font-weight: bold;
+  font-size: rem(16);
+  line-height: 1;
+  letter-spacing: normal;
+  color: $text;
+  background: #F1F1F1;
+  position: relative;
+
+}
+
+// 下のライン  is-activeの時だけつける
+.c-tab-switch__tabs > li > a::before{
+  content: "";
+  display: block;
+  width: 100%;
+  height: rem(5);
+  background: #40BF9D;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transition: all .3s;
+
+  opacity: 0;
+  visibility: hidden;
+}
+.c-tab-switch__tabs > li > a.is-active::before{
+  opacity: 1;
+  visibility: visible;
+}
+
+
+// コンテンツ部分
+.c-tab-switch__contents > li{
+  padding-top: rem(30);
+  padding-bottom: rem(30);
+  padding-right: rem(10);
+  padding-left: rem(10);
+
+  display: none;
+}
+
+.c-tab-switch__contents > li.is-active{
+  display: block;
+}

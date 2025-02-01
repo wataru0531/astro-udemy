@@ -1,0 +1,93 @@
+---
+// ナビゲーション
+
+const navs = [
+  {
+    href: "/",
+    label: "Home",
+  },
+  {
+    href: "/about",
+    label: "About",
+  },
+  {
+    href: "/contact",
+    label: "Contact",
+  },
+]
+
+// activeな要素だけスタイルを変える
+const active = "/about";
+
+
+---
+
+<header class="header">
+  <div class="header__inner">
+    <h1>astro</h1>
+    <nav>
+      <ul class="items">
+        {
+          // この{}はastro独自の{}。JSXと同じ
+          // 星Astro(や React)は、JSX内で{}の中に配列が入ると、その中の各要素を自動的に展開してHTMLにする仕組みになっている
+          navs.map(nav => (
+            // ⭐️class:list →  動的にクラスを追加するための特殊な構文
+            //                 
+            <li 
+              class="item" 
+              // class:list={[[nav.href === active && "is-active"]]}
+            >
+              <a href={ nav.href }>{ nav.label }</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style lang="scss">
+  .header{
+    height: 60px;
+  }
+
+  .header__inner{
+    padding-left: 20px;
+    padding-right: 20px;
+    height: inherit;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .items{
+    display: flex;
+    align-items: center;
+  }
+
+  .item:not(:last-child){
+    margin-right: 10px;
+  }
+
+  .item.is-active{
+    opacity: .5;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const currentPath = window.location.pathname;
+    const items = [...document.querySelectorAll(".item")];
+    items.forEach((item) => {
+      const link = item.querySelector("a");
+      // console.log(link?.getAttribute("href")); // /, /about, /contact
+
+      if(link && link.getAttribute("href") === currentPath){
+        item.classList.add("is-active");
+      } else {
+        item.classList.remove("is-active");
+      }
+    })
+  })
+
+</script>

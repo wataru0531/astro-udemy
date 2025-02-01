@@ -1,0 +1,75 @@
+/*******************************************************
+
+.p-card-lists-123     1列 → ２列 → 3列
+
+********************************************************/
+@use '../global/' as *;
+@use "sass:math";
+
+.p-card-lists-123{
+
+  @include mq('tab'){
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+// カードの横幅
+.p-card-lists-123__card{
+  
+  @include mq('tab'){
+    width: 100%;
+    // 1枚の横幅 - 1つの余白をカード2枚で割る
+    max-width: calc(math.div(100%, 2) - math.div(rem(20), 2));
+  }
+  @include mq('pc'){
+    // 1枚の横幅 - 2つの余白をカード3枚で割る
+    max-width: calc(math.div(100%, 3) - math.div(rem(30)*2, 3));
+  }
+}
+
+// スマホ
+.p-card-lists-123__card:not(:first-child){
+  margin-top: rem(30);
+
+  @include mq('tab'){
+    margin-top: 0;
+  }
+}
+
+// タブレット
+.p-card-lists-123__card:nth-child(odd){
+
+  @include mq('tab'){
+    margin-right: rem(20);
+  }
+  @include mq('pc'){
+    margin-right: 0;
+  }
+}
+// 3番目以降
+.p-card-lists-123__card:nth-child(n+3){
+
+  @include mq('tab'){
+    margin-top: rem(20);
+  }
+  @include mq('pc'){
+    margin-top: 0;
+  }
+}
+
+// パソコン
+// 3の倍数以外
+.p-card-lists-123__card:not(:nth-child(3n)){
+
+  @include mq('pc'){
+    margin-right: rem(30);
+  }
+}
+// 4番目以降
+.p-card-lists-123__card:nth-child(n+4){
+
+  @include mq('pc'){
+    margin-top: rem(20);
+  }
+}
