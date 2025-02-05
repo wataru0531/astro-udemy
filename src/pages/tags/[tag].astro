@@ -1,0 +1,78 @@
+---
+// ダイナミックルーティング
+// サーバー側でレンダリング
+
+// パスを取得 [tag].astro の tagに入るパスを取得
+export async function getStaticPaths(){
+
+  const allPosts = import.meta.glob("../blog/*.md", { eager: true });
+  // console.log(allPosts); // オブジェクト単体で取得
+
+  // mdファイルからtagsを全て取得
+  // console.log(new Set()); // Set(0) {}。⭐️配列から重複を省くことができる
+  // console.log([...new Set]); // []
+  // console.log(new Set(Object.values(allPosts).map(post => post.frontmatter.tags).flat()))
+  // → Set(3) { 'astro', 'javascript', 'php' }
+  // flat() → ネストされた配列を平坦化
+  const uniqueTags = [...new Set(Object.values(allPosts).map(post => post.frontmatter.tags).flat())];
+  // console.log(uniqueTags); // [ 'astro', 'javascript', 'php' ]
+
+  // uniqueTagsに対するページを生成するようにAstroに指示
+  return uniqueTags.map(tag => {
+    // ⭐️全てのmdファイルのtagsとuniqueTagsと一致するmdファイルだけを取得する
+    // console.log(tag)
+    const filteredPosts = Object.values(allPosts).filter(post => post.frontmatter.tags.includes(tag));
+    // console.log(filteredPosts);
+
+    // ⭐️ここで、params: { tag } とすることで動的ルートを生成
+    return { 
+      params: { tag: tag },
+      props: { posts: filteredPosts }
+    }
+  });
+}
+
+const { tag } = Astro.params; // 現在のurlのtagをセットする
+const filteredPosts = Astro.props.posts; // getStaticPathsで設定したfilteredPostsを取得
+// console.log(filteredPosts);
+
+
+// 全てのmdファイルを取得
+// トップレベルでのawaitは許可される
+// const allPosts = await Astro.glob("../blog/*.md");
+// { eager: true } → デフォルトではlazy loadで読み込まれるが、即時に読み込まれる。
+// const allPosts = import.meta.glob("../blog/*.md", { eager: true }); // 同期的に取得
+// console.log(allPosts); // オブジェクト
+
+// mdファイルのフロントマターからtagに一致するmdのみ取取得する
+// Object.values(allPosts) // オブジェクトの値部分を取得し配列で返す
+// const filteredPosts = Object.values(allPosts).filter((post) => {
+//   // console.log(post)
+//   return post.frontmatter.tags?.includes(tag);
+// });
+// console.log(filteredPosts);
+
+---
+
+
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>tag | tags</title>
+
+</head>
+<body>
+  <h1>{ tag }</h1>
+
+  <ul>
+    {
+      filteredPosts.map(post => (
+        <li><a href={ post.url }>{ post.frontmatter.title }</a></li>
+      ))
+    }
+  </ul>
+</body>
+</html>

@@ -1,0 +1,55 @@
+---
+// ブログ一覧ページ
+
+import { getBlogs } from "src/utils/api";
+import type { BlogType } from "src/utils/api";
+
+// blogs → 任意の変数名に変更
+const { contents: blogs } = await getBlogs({ fields: ["id", "title", "thumbnail", "content", "publishedAt"] });
+// console.log(data);
+
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>一覧ページ | tanimakoのudemy</title>
+</head>
+<body>
+  <section>
+    <ul>
+      {
+        blogs.map(({ id, title, thumbnail, content, publishedAt }) => {
+          return (
+            <li>
+              <a href={`http://localhost:4321/blogs/${id}`}>
+                <div>id: { id }</div>
+                <div>タイトル: { title }</div>
+              
+                <img src={ thumbnail.url } alt={ title }>
+                <div>本文: { content }</div>
+                <div>日付: { publishedAt }</div>
+              </a>
+            </li>
+          )
+        })
+      }
+    </ul>
+
+
+  </section>
+</body>
+</html>
+
+<style lang="scss">
+  li:not(:first-child){
+    margin-top: 20px;
+  }
+
+  a{
+    display: block;
+  }
+
+</style>

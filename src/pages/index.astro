@@ -24,6 +24,15 @@ import Btn from "../components/Btn.astro";
 
 const color =  "yellow";
 const btnTitle = "ボタン1";
+
+
+// microCMSからデータ取得
+import { getBlogs } from 'src/utils/api';
+import type { BlogType } from 'src/utils/api';
+const { contents: blogs } = await getBlogs();
+console.log(blogs);
+
+
 ---
 
 
@@ -44,16 +53,40 @@ const btnTitle = "ボタン1";
 
 	<p class="description">CSSに変数を使います</p>
 
-	<section class="container">
-		<div class="container__inner">
-			<h2 class="container__title">セクションタイトル</h2>
-			<div class="container__subtitle">サブタイトル</div>
+  <div id="page-container" data-page="home">
+    <section class="container">
+      <div class="container__inner">
+        <h2 class="container__title">セクションタイトル</h2>
+        <div class="container__subtitle">サブタイトル</div>
 
-			<div class="container__btn">
-				<Btn btnTitle={ btnTitle }/>
-			</div>
-		</div>
-	</section>
+        <div class="container__btn">
+          <Btn btnTitle={ btnTitle }/>
+        </div>
+
+        <!-- ブログ一覧 -->
+        <ul class="container__blogs">
+          { 
+            blogs.map(blog => {
+              return (
+                <li>
+                  <a href="">
+                    { blog.title }
+                  </a>
+                </li>
+              )
+            })
+
+          }
+
+         
+        </ul>
+        
+      </div>
+
+    </section>
+
+    
+  </div>
 </Layout>
 
 
@@ -91,34 +124,38 @@ headタグ内に埋め込まれて個別のクラス名が割り当てられる
 		background-color: green;
 	} */
 
-.container{
-	margin-top: 10px;
-}
+	.container{
+		margin-top: 10px;
+	}
 
-.container__inner{
-	margin: 0 auto;
-	padding-left: 20px;
-	padding-right: 20px;
-	width: 100%;
-	max-width: 768px;
-}
+	.container__inner{
+		margin: 0 auto;
+		padding-left: 20px;
+		padding-right: 20px;
+		width: 100%;
+		max-width: 768px;
+	}
 
-.container__subtitle{
-	/* color: $wineRed; */
+	.container__subtitle{
+		/* color: $wineRed; */
 
-	/* @include mq("tab"){
-		color: $text;
-	} */
-}
+		/* @include mq("tab"){
+			color: $text;
+		} */
+	}
 
 </style>
 
 
 <!-- ⭐️クライアントでJavaScriptを使う記述方法 -->
-<script>
+<script is:inline>
   document.addEventListener("DOMContentLoaded", () => {
     const h1 = document.querySelector("h1");
     // console.log(h1); // ✅ ここならエラーなし
+
+		// import("/src/script/index.js").then((module) => {
+		// 	// console.log("スクリプトが読み込まれました");
+		// })
   });
 </script>
 

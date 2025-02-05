@@ -1,0 +1,32 @@
+---
+// タグの一覧ページ
+
+const allPosts = import.meta.glob("../blog/*.md", { eager: true });
+
+const tags = [...new Set(Object.values(allPosts).map(post => post.frontmatter.tags).flat())];
+// console.log(tags); // [ 'astro', 'javascript', 'php', 'next' ]
+
+
+
+---
+
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>一覧</h1>
+  <ul>
+    {
+      tags.map(tag => (
+        <li><a href={`./${ tag }`}>{ tag }</a></li>
+      ))
+    }
+  </ul>
+
+</body>
+</html>

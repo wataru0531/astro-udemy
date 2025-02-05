@@ -1,5 +1,9 @@
 ---
 // ナビゲーション
+// ⭐️このフロントマターはデフォルトではサーバー側で実行される
+// import { setActiveNavItem } from "src/utils/navigation.js";
+// → ここでimportしてもクライアントではジックされない
+//   scriptタグでimportして使う →　SSRと分離して使うことができるため
 
 const navs = [
   {
@@ -14,6 +18,11 @@ const navs = [
     href: "/contact",
     label: "Contact",
   },
+  {
+    href: "/blogs",
+    label: "Blogs",
+  },
+
 ]
 
 // activeな要素だけスタイルを変える
@@ -69,25 +78,21 @@ const active = "/about";
     margin-right: 10px;
   }
 
-  .item.is-active{
+  .item > a.is-active{
     opacity: .5;
   }
 </style>
 
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const currentPath = window.location.pathname;
-    const items = [...document.querySelectorAll(".item")];
-    items.forEach((item) => {
-      const link = item.querySelector("a");
-      // console.log(link?.getAttribute("href")); // /, /about, /contact
+<!-- 
+  script →　デフォルトではサーバーサイドで実行される
+            is:inlineをつけるとクライアント側で実行される
+            ⭐️ client:load → これはコンポーネントで使う
+-->
 
-      if(link && link.getAttribute("href") === currentPath){
-        item.classList.add("is-active");
-      } else {
-        item.classList.remove("is-active");
-      }
-    })
-  })
+<script is:inline>
+  // → フロントマターではSSR、このscriptではCSR。
+  import("/src/utils/navigation.js").then(({ setActiveNavItem }) => {
+    setActiveNavItem();
+  });
 
 </script>

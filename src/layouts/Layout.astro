@@ -1,5 +1,6 @@
 ---
 // 基本的なレイアウト
+// ここはサーバー側でレンダリングされる SSR
 
 // Google Fontsの読み込みを最適化
 // → レンダリングの最適化、不要なフォントを省く、キャッシュ最適化、Google Fontsのリクエストを減らす
@@ -58,7 +59,7 @@ const { title, color } = Astro.props;
 		
 		<title>{ title }</title>
 	</head>
-	<body>
+	<body class="home">
 
 		<Navigation />
 

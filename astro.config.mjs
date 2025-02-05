@@ -2,10 +2,13 @@
 import { defineConfig } from 'astro/config';
 import sitemap from "sitemap";
 
+import glsl from "vite-plugin-glsl";
+
 // https://astro.build/config
 export default defineConfig({
   vite: {
-      css: {
+    plugins: [glsl()],
+    css: {
       preprocessorOptions: {
         scss: {
           // ここで読み込んだscssのファイル内の変数や関数がastroファイルで使用可能となる
