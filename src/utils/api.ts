@@ -62,3 +62,13 @@ export const getBlogDetail = async (contentId: string, queries?: MicroCMSQueries
   return data;
 }
 
+
+// profileのデータを取得(オブジェクト形式)
+export const getProfileData = async (queries?: MicroCMSQueries) => {
+  const data = await client.get({
+    endpoint: "profile",
+    queries: queries,
+  });
+
+  return data;
+}

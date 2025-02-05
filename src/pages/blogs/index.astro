@@ -8,6 +8,9 @@ import type { BlogType } from "src/utils/api";
 const { contents: blogs } = await getBlogs({ fields: ["id", "title", "thumbnail", "content", "publishedAt"] });
 // console.log(data);
 
+// TODO
+// 記事追加と同時にリアウタイムで記事表示
+
 ---
 
 <!DOCTYPE html>

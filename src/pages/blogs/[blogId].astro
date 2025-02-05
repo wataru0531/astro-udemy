@@ -4,6 +4,7 @@ import Layout from 'src/layouts/Layout.astro';
 
 import { getBlogs, getBlogDetail } from 'src/utils/api';
 
+// 詳細ページ生成
 export async function getStaticPaths(){
 
   const response = await getBlogs({ fields: [ "id" ] }); // idのみを絞る
@@ -13,7 +14,7 @@ export async function getStaticPaths(){
   // ⭐️ ここではこのidのページを生成しますよという意味
   // [{ params: { blogId: content.id }}, { params: { blogId: content.id }}, ...]
   return response.contents.map((content: any) => {
-    return { params: { blogId: content.id }}
+    return { params: { blogId: content.id }} // [blogId].astroの動的ルートパスの名前を合わせる
   });
 }
 

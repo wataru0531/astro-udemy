@@ -26,11 +26,26 @@ const color =  "yellow";
 const btnTitle = "ボタン1";
 
 
-// microCMSからデータ取得
+// microCMSからブログのデータ取得
 import { getBlogs } from 'src/utils/api';
 import type { BlogType } from 'src/utils/api';
-const { contents: blogs } = await getBlogs();
-console.log(blogs);
+const { contents: blogs } = await getBlogs({
+  // limit: 3, // 取得するデータの件数
+  // offset: 0, // 取得するデータの開始位置
+  // filters: , // 特定の条件で絞り込む
+  orders: "-createdAt", // マイナスで降順(デフォルトで降順)
+  // q: "javascript", // キーワード検索。ここではjavascriptがキーワード
+});
+// console.log(blogs);
+
+// profileのデータ取得
+import { getProfileData } from 'src/utils/api';
+
+const data = await getProfileData({ 
+  fields: ["name", "hobby", "image"] 
+});
+const { name, bobby, image } = data;
+// console.log(data);
 
 
 ---
@@ -75,12 +90,26 @@ console.log(blogs);
                 </li>
               )
             })
-
           }
-
-         
         </ul>
-        
+
+        <!-- プロフィール -->
+        <dl>
+          <div>
+            <dt>指名</dt>
+            <dd></dd>
+          </div>
+          <div>
+            <dt>趣味</dt>
+            <dd></dd>
+          </div>
+          <div>
+            <dt>画像</dt>
+            <dd>
+              <img src={image.url} alt="">
+            </dd>
+          </div>
+        </dl>
       </div>
 
     </section>
